@@ -45,7 +45,7 @@ const Delete = styled.div`
   background-color: #fcdfdf;
   color: rgba(255,255,255, 1);
   border-radius: 0 5px 5px 0;
-  padding: 1.2em .3em 0;
+  padding: 2.1em .3em;
   font-size: 1.5em;
   opacity: 0;
   transform: translateX(-3px);
@@ -65,10 +65,10 @@ const Note = () => {
   return (
     <NoteContainer>
       <ContentContainer>
-        <div class="title">
+        <div className="title">
           Un titre
         </div>
-        <div class="content">
+        <div className="content">
           Simplement le debut de la note, une sorte de petit preview histoire de
         </div>
       </ContentContainer>
