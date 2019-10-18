@@ -5,6 +5,7 @@ import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
 
 const NotesContainer = styled.div`
+  @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap');
   width: 100vw;
   min-width: 100vw;
   max-width: 100vw;

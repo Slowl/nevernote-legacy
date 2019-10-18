@@ -6,7 +6,6 @@ import TitleInput from './TitleInput'
 import NoteInput from './NoteInput'
 
 const EditorContainer = styled.div`
-  @import url('https://fonts.googleapis.com/css?family=Oswald:300,400&display=swap');
   max-width: 75vw;
   min-width: 75vw;
   max-height: 100vh;
@@ -16,17 +15,19 @@ const EditorContainer = styled.div`
 const Button = styled.div`
   padding: .6em 0 .4em;
   width: 100%;
+  border-top: 1px solid rgba(0,0,0,.08);
+  color: rgba(0,0,0, .3);
   text-align: center;
   box-sizing: border-box;
-  background-color: rgba(191, 50, 50, .8);
-  color: white;
   font-size: 2.2em;
   font-weight: 500;
   cursor: pointer;
   transition: .4s;
 
   :hover {
-    background-color: rgba(191, 50, 50, 1);
+    background-color: rgba(0,0,0,.04);
+    border-top: 1px solid rgba(0,0,0,.01);
+    color: rgba(0,0,0, .8);
   }
 `
 

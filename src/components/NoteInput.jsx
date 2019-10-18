@@ -8,14 +8,14 @@ const MainInput = styled.textarea`
   max-width: 100%;
   height: calc(100% - 7.2em);
   border: 0;
-  padding: 1.5em;
+  padding: 1em 1.5em 0em 1.5em;
   resize: none;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 300;
+  font-family: 'Montserrat', sans-serif;;
+  font-weight: 400;
   font-size: 1.4em;
   letter-spacing: 1px;
   word-spacing: 2px;
-  color: #2f2f2f;
+  color: rgba(0,0,0, .8);
 `
 
 const NoteInput = () => {
