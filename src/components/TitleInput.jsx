@@ -1,33 +1,70 @@
 import React from 'react'
 import styled from 'styled-components'
 
+const TitleContainer = styled.div`
+  display: flex;
+`
+
 const Title = styled.input`
   box-sizing: border-box;
   width: 100%;
-  height: 3em;
-  padding: .5em;
+  padding: 1.5em 1em 0em 1em;
   font-size: 1.6em;
-  font-family: 'Oswald', sans-serif;
-  font-weight: 400;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: #2f2f2f;
+  color: rgba(0,0,0, .8);
   border: 0;
-  border-bottom: 3px solid rgba(191, 50, 50, .3);
   transition: ease-in .2s;
+`
 
-  ::placeholder {
-    color: rgba(191, 50, 50, .8);
+const Picker = styled.div`
+  display: flex;
+  padding-top: 1.4em;
+  padding-right: 1.5em;
+  .dark {
+    width: 35px;
+    height: 35px;
+    margin: .25em;
+    border-radius: 30px;
+    background-color: #555555;
+    box-sizing: border-box;
+    border: ${props => props.selected ? '4px solid rgba(255,255,255, .6);' : '0px solid rgba(255,255,255, .6);'};
+    cursor: pointer;
+    transition: linear .15s;
+
+    :hover {
+      border: 4px solid rgba(255,255,255, .6);
+    }
   }
 
-  :focus {
-    border-bottom: 3px solid rgba(191, 50, 50, .6);
+  .red {
+    width: 35px;
+    height: 35px;
+    margin: .25em;
+    border-radius: 30px;
+    background-color: #ed6868 ;
+    box-sizing: border-box;
+    border: ${props => props.selected ? '4px solid rgba(255,255,255, .6)' : '0px solid rgba(255,255,255, .6)'};
+    cursor: pointer;
+    transition: linear .15s;
+
+    :hover {
+      border: 4px solid rgba(255,255,255, .6);
+    }
   }
 `
 
 const TitleInput = () => {
   return (
-    <Title type="text" placeholder="write your title ..."/>
+    <TitleContainer>
+      <Title type="text" placeholder="write your title ..."/>
+      <Picker>
+        <div class="dark" />
+        <div class="red" />
+      </Picker>
+    </TitleContainer>
   )
 }
 
