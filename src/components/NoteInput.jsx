@@ -18,9 +18,9 @@ const MainInput = styled.textarea`
   color: rgba(0,0,0, .8);
 `
 
-const NoteInput = () => {
+const NoteInput = ({ onChange, value }) => {
   return (
-      <MainInput type="text" placeholder="write your note ..." />
+      <MainInput type="text" placeholder="write your note ..." onChange={onChange} value={value}/>
   )
 }
 

@@ -23,46 +23,47 @@ const Picker = styled.div`
   display: flex;
   padding-top: 1.4em;
   padding-right: 1.5em;
-  .dark {
+`
+
+const DarkMark = styled.div`
     width: 35px;
     height: 35px;
     margin: .25em;
     border-radius: 30px;
     background-color: #555555;
     box-sizing: border-box;
-    border: ${props => props.selected ? '4px solid rgba(255,255,255, .6);' : '0px solid rgba(255,255,255, .6);'};
+    border: ${props => props.isSelected ? '0px solid rgba(255,255,255, .6);' : '4px solid rgba(255,255,255, .6);'};
     cursor: pointer;
     transition: linear .15s;
 
     :hover {
       border: 4px solid rgba(255,255,255, .6);
     }
-  }
+`
 
-  .red {
+const RedMark = styled.div`
     width: 35px;
     height: 35px;
     margin: .25em;
     border-radius: 30px;
     background-color: #ed6868 ;
     box-sizing: border-box;
-    border: ${props => props.selected ? '4px solid rgba(255,255,255, .6)' : '0px solid rgba(255,255,255, .6)'};
+    border: ${props => props.isSelected ? '4px solid rgba(255,255,255, .6)' : '0px solid rgba(255,255,255, .6)'};
     cursor: pointer;
     transition: linear .15s;
 
     :hover {
       border: 4px solid rgba(255,255,255, .6);
     }
-  }
 `
 
-const TitleInput = () => {
+const TitleInput = ({ onChange, onClick, value, selected }) => {
   return (
     <TitleContainer>
-      <Title type="text" placeholder="write your title ..."/>
+      <Title type="text" placeholder="write your title ..." onChange={onChange} value={value} />
       <Picker>
-        <div class="dark" />
-        <div class="red" />
+        <DarkMark onClick={() => onClick(false)} isSelected={selected} />
+        <RedMark  onClick={() => onClick(true)} isSelected={selected} />
       </Picker>
     </TitleContainer>
   )
