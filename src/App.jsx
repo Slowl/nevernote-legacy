@@ -63,6 +63,7 @@ const App = () => {
       db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now() })
       setTitle('')
       setNote('')
+      Requestor()
     } else if (!!usedId) {
       db.collection("notes").doc(usedId).update({
         title: title,
@@ -70,6 +71,9 @@ const App = () => {
         marked: marked,
         modifiedAt: Date.now()
       })
+      .then(
+        Requestor()
+      )
     }
   }
 
