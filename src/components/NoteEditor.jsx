@@ -31,12 +31,13 @@ const Button = styled.div`
   }
 `
 
-const NoteEditor = () => {
+const NoteEditor = ({ onTitleChange, onNoteChange, onClickMark, onClickSend, note, title, marked }) => {
+
   return (
     <EditorContainer>
-      <TitleInput />
-      <NoteInput />
-      <Button> <FiCheck /> </Button>
+      <TitleInput onChange={onTitleChange} onClick={onClickMark} value={title} selected={marked}/>
+      <NoteInput onChange={onNoteChange} value={note} />
+      <Button onClick={onClickSend}> <FiCheck /> </Button>
     </EditorContainer>
   )
 }

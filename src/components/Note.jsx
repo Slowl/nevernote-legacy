@@ -7,7 +7,7 @@ const NoteContainer = styled.div`
   width: 90%;
   margin: 1em auto;
   border-radius: 0 5px 5px 0;
-  border-left: 1px solid rgba(0,0,0, .3);
+  border-left: ${props => props.isMarked ? '1px solid rgba(255, 0, 0, 0.7)' : '1px solid rgba(0,0,0, .3)'};
   display: flex;
 
   cursor: pointer;
@@ -28,6 +28,7 @@ const ContentContainer = styled.div`
     font-weight: 500;
     font-size: 1.3em;
     word-spacing: 1px;
+    text-transform: uppercase;
     color: rgba(0,0,0, .7)
   }
 
@@ -61,15 +62,15 @@ const Delete = styled.div`
   }
 `
 
-const Note = () => {
+const Note = ({ title, note, marked, onClick }) => {
   return (
-    <NoteContainer>
+    <NoteContainer onClick={onClick} isMarked={marked}>
       <ContentContainer>
         <div className="title">
-          Un titre
+          {title}
         </div>
         <div className="content">
-          Simplement le debut de la note, une sorte de petit preview histoire de
+          {note}
         </div>
       </ContentContainer>
 

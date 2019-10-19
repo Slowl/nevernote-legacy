@@ -11,14 +11,26 @@ const NavContainer = styled.div`
   background-color: rgba(0,0,0,.02);
 `
 
-const NoteNav = () => {
+const NoteNav = ({ data, onNoteClick }) => {
   return (
     <NavContainer>
-      <Note />
-      <Note />
-      <Note />
-      <Note />
-      <Note />
+      {(!!data && data.length === 1) && (
+        <Note
+          title={data[0].title}
+          note={data[0].note}
+          marked={data[0].marked}
+          onClick={() => onNoteClick(data[0].title, data[0].note, data[0].id )} />
+      )}
+      {(!!data && data.length > 1) && data.map(items => (
+        <Note
+          key={items.id}
+          title={items.title}
+          note={items.note}
+          marked={items.marked}
+          onClick={() => onNoteClick(items.title, items.note, items.id)}
+        />
+      )
+    )}
     </NavContainer>
   )
 }
