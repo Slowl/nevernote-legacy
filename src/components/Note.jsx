@@ -4,11 +4,13 @@ import { FiX } from "react-icons/fi"
 
 const NoteContainer = styled.div`
   font-family: 'Montserrat', sans-serif;
-  width: 90%;
+  min-width: 90%;
+  max-width: 90%;
   margin: 1em auto;
   border-radius: 0 5px 5px 0;
   border-left: ${props => props.isMarked ? '1px solid rgba(255, 0, 0, 0.7)' : '1px solid rgba(0,0,0, .3)'};
-  display: flex;
+  display:flex;
+  justify-content: space-between;
 
   cursor: pointer;
   transition: .15s;
@@ -20,9 +22,7 @@ const NoteContainer = styled.div`
 `
 
 const ContentContainer = styled.div`
-
   padding: .5em;
-
   .title {
     padding-left: .3em;
     font-weight: 500;
