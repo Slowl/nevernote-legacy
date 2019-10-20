@@ -22,7 +22,7 @@ const App = () => {
   const [ note, setNote ] = useState('')
   const [ marked, setMark ] = useState(false)
   const [ data, setData ] = useState()
-  const [ usedId, setExistingId ] = useState()
+  const [ usedId, setExistingId ] = useState(undefined)
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -37,6 +37,12 @@ const App = () => {
       })
       setData(allNotes)
     })
+  }
+
+  const Resetor = () => {
+    setTitle('')
+    setNote('')
+    setExistingId(undefined)
   }
 
   useEffect(() => {
@@ -61,9 +67,8 @@ const App = () => {
 
     if ((!!title && !!note) && usedId === undefined) {
       db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now() })
-      setTitle('')
-      setNote('')
       Requestor()
+      Resetor()
     } else if (!!usedId) {
       db.collection("notes").doc(usedId).update({
         title: title,
@@ -85,10 +90,7 @@ const App = () => {
 
   const handleDeleteNote = deleteId => {
     db.collection("notes").doc(deleteId).delete()
-    .then(
-      Requestor()
-    )
-
+    .then( () => deleteId === usedId ? (Requestor(), Resetor()) : Requestor() )
   }
 
   return (
@@ -97,6 +99,7 @@ const App = () => {
         data={data}
         onNoteClick={handleNoteClick}
         onDeleteClick={handleDeleteNote}
+        reset={() => Resetor()}
       />
       <NoteEditor
         onTitleChange={handleTitleChange}
