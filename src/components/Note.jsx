@@ -23,13 +23,20 @@ const NoteContainer = styled.div`
 
 const ContentContainer = styled.div`
   padding: .5em;
-  width: 100%;
+  width: 18vw;
+  min-width: 18vw;
+  max-width: 18vw;
+  height: auto;
+  max-height: 7.2em;
   .title {
     padding-left: .3em;
     font-weight: 500;
     font-size: 1.3em;
     word-spacing: 1px;
     text-transform: uppercase;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     color: rgba(0,0,0, .7)
   }
 
@@ -39,7 +46,23 @@ const ContentContainer = styled.div`
     font-size: 1.1em;
     letter-spacing: 1px;
     word-spacing: 1px;
+    overflow: hidden;
     color: rgba(0,0,0, .4);
+    position: relative;
+    max-height: 5em;
+    min-height: 5em;
+    height: 5em;
+      :after {
+        content: "";
+        text-align: right;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        width: 40%;
+        height: 20px;
+        background: linear-gradient(to right, rgba(255, 255, 255, 0.3), #fafafa 50%);
+      }
+    }
   }
 `
 
