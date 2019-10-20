@@ -62,10 +62,10 @@ const Delete = styled.div`
   }
 `
 
-const Note = ({ title, note, marked, onClick }) => {
+const Note = ({ title, note, marked, onClick, eximo }) => {
   return (
-    <NoteContainer onClick={onClick} isMarked={marked}>
-      <ContentContainer>
+    <NoteContainer isMarked={marked}>
+      <ContentContainer onClick={onClick}>
         <div className="title">
           {title}
         </div>
@@ -74,7 +74,7 @@ const Note = ({ title, note, marked, onClick }) => {
         </div>
       </ContentContainer>
 
-      <Delete><FiX /></Delete>
+      <Delete onClick={eximo}><FiX /></Delete>
     </NoteContainer>
   )
 }

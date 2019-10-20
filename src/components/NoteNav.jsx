@@ -11,7 +11,7 @@ const NavContainer = styled.div`
   background-color: rgba(0,0,0,.02);
 `
 
-const NoteNav = ({ data, onNoteClick }) => {
+const NoteNav = ({ data, onNoteClick, onDeleteClick }) => {
   return (
     <NavContainer>
       {(!!data && data.length === 1) && (
@@ -19,7 +19,9 @@ const NoteNav = ({ data, onNoteClick }) => {
           title={data[0].title}
           note={data[0].note}
           marked={data[0].marked}
-          onClick={() => onNoteClick(data[0].title, data[0].note, data[0].id )} />
+          onClick={() => onNoteClick(data[0].title, data[0].note, data[0].id )}
+          eximo={() => onDeleteClick(data[0].id)} 
+        />
       )}
       {(!!data && data.length > 1) && data.map(items => (
         <Note
@@ -28,6 +30,7 @@ const NoteNav = ({ data, onNoteClick }) => {
           note={items.note}
           marked={items.marked}
           onClick={() => onNoteClick(items.title, items.note, items.id)}
+          eximo={() => onDeleteClick(items.id)}
         />
       )
     )}

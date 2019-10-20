@@ -83,9 +83,21 @@ const App = () => {
     setExistingId(clickedId)
   }
 
+  const handleDeleteNote = deleteId => {
+    db.collection("notes").doc(deleteId).delete()
+    .then(
+      Requestor()
+    )
+
+  }
+
   return (
     <NotesContainer>
-      <NoteNav data={data} onNoteClick={handleNoteClick} />
+      <NoteNav
+        data={data}
+        onNoteClick={handleNoteClick}
+        onDeleteClick={handleDeleteNote}
+      />
       <NoteEditor
         onTitleChange={handleTitleChange}
         onNoteChange={handleNoteChange}
