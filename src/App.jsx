@@ -82,9 +82,10 @@ const App = () => {
     }
   }
 
-  const handleNoteClick = (clickedTitle, clickedNote, clickedId) => {
+  const handleNoteClick = (clickedTitle, clickedNote, clickedMark, clickedId) => {
     setTitle(clickedTitle)
     setNote(clickedNote)
+    setMark(clickedMark)
     setExistingId(clickedId)
   }
 

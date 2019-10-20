@@ -43,7 +43,7 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset }) => {
             title={data[0].title}
             note={data[0].note}
             marked={data[0].marked}
-            onClick={() => onNoteClick(data[0].title, data[0].note, data[0].id )}
+            onClick={() => onNoteClick(data[0].title, data[0].note,data[0].marked, data[0].id )}
             eximo={() => onDeleteClick(data[0].id)}
           />
         )}
@@ -53,7 +53,7 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset }) => {
             title={items.title}
             note={items.note}
             marked={items.marked}
-            onClick={() => onNoteClick(items.title, items.note, items.id)}
+            onClick={() => onNoteClick(items.title, items.note, items.marked, items.id)}
             eximo={() => onDeleteClick(items.id)}
           />
         )
