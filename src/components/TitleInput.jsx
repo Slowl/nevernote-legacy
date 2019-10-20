@@ -60,7 +60,7 @@ const RedMark = styled.div`
 const TitleInput = ({ onChange, onClick, value, selected }) => {
   return (
     <TitleContainer>
-      <Title type="text" placeholder="write your title ..." onChange={onChange} value={value} />
+      <Title type="text" placeholder="write your title ..." onChange={onChange} value={value} maxLength={30} />
       <Picker>
         <DarkMark onClick={() => onClick(false)} isSelected={selected} />
         <RedMark  onClick={() => onClick(true)} isSelected={selected} />
