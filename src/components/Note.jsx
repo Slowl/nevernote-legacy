@@ -23,6 +23,7 @@ const NoteContainer = styled.div`
 
 const ContentContainer = styled.div`
   padding: .5em;
+  width: 100%;
   .title {
     padding-left: .3em;
     font-weight: 500;
