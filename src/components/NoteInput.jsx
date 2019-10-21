@@ -16,6 +16,10 @@ const MainInput = styled.textarea`
   letter-spacing: 1px;
   word-spacing: 2px;
   color: rgba(0,0,0, .8);
+  
+  :focus {
+    outline: 0;
+  }
 `
 
 const NoteInput = ({ onChange, value }) => {

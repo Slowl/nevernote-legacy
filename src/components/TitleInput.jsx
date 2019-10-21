@@ -17,6 +17,10 @@ const Title = styled.input`
   color: rgba(0,0,0, .8);
   border: 0;
   transition: ease-in .2s;
+
+  :focus {
+    outline: 0;
+  }
 `
 
 const Picker = styled.div`
