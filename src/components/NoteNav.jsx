@@ -33,11 +33,21 @@ const New = styled.div`
   }
 `
 
+const EmptyNav = styled.div`
+  width: 80%;
+  margin: auto;
+  font-size: 1.3em;
+  padding: 1em;
+  text-align: center;
+  color: rgba(0,0,0, .3);
+`
+
 const NoteNav = ({ data, onNoteClick, onDeleteClick, reset }) => {
   return (
     <NavContainer>
       <New onClick={reset}> <FiPlus /> </New>
       <NoteContaier>
+        {(!!data && data.length === 0) && <EmptyNav> No notes to display ... </EmptyNav>}
         {(!!data && data.length === 1) && (
           <Note
             title={data[0].title}
