@@ -4,6 +4,7 @@ import firebase from './config/firebase'
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
+import Toast from './components/Toast'
 
 const NotesContainer = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap');
@@ -23,6 +24,8 @@ const App = () => {
   const [ marked, setMark ] = useState(false)
   const [ data, setData ] = useState()
   const [ usedId, setExistingId ] = useState(undefined)
+  const [ done, setReqState ] = useState(false)
+  const [ action, setAction ] = useState('')
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -62,14 +65,17 @@ const App = () => {
     setNote(e.target.value)
   }
 
-  const sendOrUpdate = () => {
+  const sendOrUpdate = async () => {
     const id = Math.random().toString(36).slice(2).padEnd(11,0)
 
     if ((!!title && !!note) && usedId === undefined) {
+      await handleToast('Added', false)
       db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now() })
       Requestor()
       Resetor()
+      handleToast('Added', true)
     } else if (!!usedId) {
+      await handleToast('Updated', false)
       db.collection("notes").doc(usedId).update({
         title: title,
         note: note,
@@ -77,6 +83,7 @@ const App = () => {
         modifiedAt: Date.now()
       })
       .then(
+        handleToast('Updated', true),
         Requestor()
       )
     }
@@ -89,9 +96,18 @@ const App = () => {
     setExistingId(clickedId)
   }
 
-  const handleDeleteNote = deleteId => {
+  const handleDeleteNote = async (deleteId) => {
+    await handleToast('deleted', false)
     db.collection("notes").doc(deleteId).delete()
-    .then( () => deleteId === usedId ? (Requestor(), Resetor()) : Requestor() )
+    .then( () => deleteId === usedId ? (Requestor(), Resetor(), handleToast('deleted', true)) : Requestor(), handleToast('deleted', true))
+  }
+
+  const handleToast = (text, reqState) => {
+    setAction(text)
+    setReqState(reqState)
+    setTimeout(() => {
+      setReqState(!reqState)
+    }, 1500)
   }
 
   return (
@@ -110,6 +126,8 @@ const App = () => {
         note={note}
         title={title}
         marked={marked}
+        reqState={done}
+        action={action}
        />
     </NotesContainer>
   )
