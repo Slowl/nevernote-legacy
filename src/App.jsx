@@ -21,7 +21,7 @@ const App = () => {
   const [ title, setTitle ] = useState('')
   const [ note, setNote ] = useState('')
   const [ marked, setMark ] = useState(false)
-  const [ data, setData ] = useState()
+  const [ data, setData ] = useState([])
   const [ usedId, setExistingId ] = useState(undefined)
   const [ done, setReqState ] = useState(false)
   const [ action, setAction ] = useState('')
@@ -65,9 +65,8 @@ const App = () => {
   }
 
   const sendOrUpdate = async () => {
-    const id = Math.random().toString(36).slice(2).padEnd(11,0)
-
-    if ((!!title && !!note) && usedId === undefined) {
+    if (!!title && usedId === undefined) {
+      const id = Math.random().toString(36).slice(2).padEnd(11,0)
       await handleToast('Added', false)
       db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now() })
       Requestor()
@@ -82,8 +81,8 @@ const App = () => {
         modifiedAt: Date.now()
       })
       .then(
-        handleToast('Updated', true),
-        Requestor()
+        Requestor(),
+        handleToast('Updated', true)
       )
     }
   }

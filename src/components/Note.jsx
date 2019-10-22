@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { FiX } from "react-icons/fi"
+import ReactHtmlParser from 'react-html-parser';
 
 const NoteContainer = styled.div`
   font-family: 'Montserrat', sans-serif;
@@ -94,7 +95,7 @@ const Note = ({ title, note, marked, onClick, eximo }) => {
           {title}
         </div>
         <div className="content">
-          {note}
+          {ReactHtmlParser(note)}
         </div>
       </ContentContainer>
 
