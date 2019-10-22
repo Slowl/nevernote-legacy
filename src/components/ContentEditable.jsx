@@ -57,7 +57,7 @@ render() {
             onInput={this.emitChange}
             onBlur={this.emitChange}
             contentEditable
-            dangerouslySetInnerHTML={{__html: this.props.html}}>{this.props.value}</MainInput>
+            >{this.props.value}</MainInput>
     )
   }
 }
