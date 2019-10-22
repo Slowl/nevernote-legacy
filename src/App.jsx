@@ -37,7 +37,7 @@ const App = () => {
         const reqData = items.data()
         allNotes.push(reqData)
       })
-      setData(allNotes)
+      setData(allNotes.sort((a,b)=> a.modifiedAt > b.modifiedAt ? -1 : 1))
     })
   }
 
@@ -68,7 +68,7 @@ const App = () => {
     if (!!title && usedId === undefined) {
       const id = Math.random().toString(36).slice(2).padEnd(11,0)
       await handleToast('Added', false)
-      db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now() })
+      db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now(), modifiedAt: Date.now() })
       Requestor()
       Resetor()
       handleToast('Added', true)
