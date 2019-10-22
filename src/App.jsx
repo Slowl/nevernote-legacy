@@ -4,7 +4,6 @@ import firebase from './config/firebase'
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
-import Toast from './components/Toast'
 
 const NotesContainer = styled.div`
   @import url('https://fonts.googleapis.com/css?family=Montserrat:400,500&display=swap');
