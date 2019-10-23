@@ -6,7 +6,7 @@ const MainInput = styled.div`
   box-sizing: border-box;
   min-width: 100%;
   max-width: 100%;
-  height: calc(100% - 7.2em);
+  height: calc(100% - 7em);
   border: 0;
   padding: 1em 1.5em 0em 1.5em;
   resize: none;
@@ -15,6 +15,8 @@ const MainInput = styled.div`
   font-size: 1.4em;
   letter-spacing: 1px;
   word-spacing: 2px;
+  overflow: auto;
+  overflow-wrap: break-word;
   color: rgba(0,0,0, .8);
 
   :focus {
