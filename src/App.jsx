@@ -53,7 +53,7 @@ const App = () => {
   }, [])
 
   const handleTitleChange = e => {
-    setTitle(e.target.value)
+    setTitle(e.target.value.toUpperCase())
   }
 
   const handleMark = value => {
