@@ -8,7 +8,7 @@ const MainInput = styled.div`
   max-width: 100%;
   height: calc(100% - 7em);
   border: 0;
-  padding: 1em 1.5em 0em 1.5em;
+  padding: .5em 1.5em 0em 1.5em;
   resize: none;
   font-family: 'Montserrat', sans-serif;;
   font-weight: 400;

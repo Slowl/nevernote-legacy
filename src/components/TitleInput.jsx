@@ -8,7 +8,7 @@ const TitleContainer = styled.div`
 const Title = styled.input`
   box-sizing: border-box;
   width: 100%;
-  padding: 1.5em 1em 0em 1em;
+  padding: .5em 1em;
   font-size: 1.6em;
   font-family: 'Montserrat', sans-serif;
   font-weight: 500;
