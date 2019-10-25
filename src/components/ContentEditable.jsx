@@ -18,6 +18,39 @@ const MainInput = styled.div`
   overflow: auto;
   overflow-wrap: break-word;
   color: rgba(0,0,0, .8);
+  scrollbar-color: rgba(0,0,0, .2) rgba(0,0,0,0);
+  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0, .1);
+    border: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0, .2);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0, .2);
+  }
+  ::-webkit-scrollbar-track {
+    background: #rgba(0,0,0,0);
+    border: 0px none #ffffff;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-track:active {
+    background: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
 
   :focus {
     outline: 0;

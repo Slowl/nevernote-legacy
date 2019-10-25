@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Note from './Note'
+import PopupBox from './PopupBox'
 import { FiPlus } from "react-icons/fi"
 
 const NavContainer = styled.div`
@@ -9,19 +10,54 @@ const NavContainer = styled.div`
   background-color: rgba(0,0,0,.02);
 `
 
-const NoteContaier = styled.div`
+const NoteContainer = styled.div`
   overflow-y: auto;
-  max-height: calc(100vh - 5.45em);
-  min-height: calc(100vh - 5.45em);
+  max-height: calc(100vh - 10.1em);
+  min-height: calc(100vh - 10.1em);
+  transition: all .3s;
+  scrollbar-color: rgba(0,0,0, .05) rgba(0,0,0,0);
+  scrollbar-width: thin;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-button {
+    width: 0px;
+    height: 0px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0, .05);
+    border: 0px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,0,0, .08);
+  }
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(0,0,0, .08);
+  }
+  ::-webkit-scrollbar-track {
+    background: #rgba(0,0,0,0);
+    border: 0px none #ffffff;
+  }
+  ::-webkit-scrollbar-track:hover {
+    background: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-track:active {
+    background: rgba(0,0,0,0);
+  }
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+
 `
 const New = styled.div`
   width: 60%;
-  margin: .5em auto 1em;
+  margin: .5em auto .5em;
   padding: .4em 0 .3em;
   text-align: center;
   font-size: 1.5em;
   color: rgba(0,0,0, .3);
-  background-color: white;
+  background-color: rgba(255,255,255,1);
   border: 1px solid rgba(0,0,0, .07);
   border-radius: 40px;
   cursor: pointer;
@@ -33,6 +69,19 @@ const New = styled.div`
   }
 `
 
+const Toolbox = styled.div`
+  height: 3.4em;
+  padding: .5em .3em;
+  width: 100%;;
+  text-align: center;
+  box-sizing: border-box;
+  border-right: 1px solid rgba(0,0,0,.05);
+  font-size: 1.6em;
+  font-weight: 500;
+  display: flex;
+  justify-content: flex-end;
+`
+
 const EmptyNav = styled.div`
   width: 80%;
   margin: auto;
@@ -42,11 +91,12 @@ const EmptyNav = styled.div`
   color: rgba(0,0,0, .3);
 `
 
-const NoteNav = ({ data, onNoteClick, onDeleteClick, reset }) => {
+const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFunc, updateFunc, titleFunc }) => {
+
   return (
     <NavContainer>
       <New onClick={reset}> <FiPlus /> </New>
-      <NoteContaier>
+      <NoteContainer>
         {(!!data && data.length === 0) && <EmptyNav> No notes to display ... </EmptyNav>}
         {(!!data && data.length === 1) && (
           <Note
@@ -68,7 +118,14 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset }) => {
           />
         )
       )}
-      </NoteContaier>
+    </NoteContainer>
+      <Toolbox>
+        <PopupBox
+          filter
+          orderByCreation={creationFunc}
+          orderByUpdate={updateFunc}
+          orderByTitle={titleFunc} />
+      </Toolbox>
     </NavContainer>
   )
 }
