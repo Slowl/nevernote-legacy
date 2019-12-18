@@ -91,7 +91,7 @@ const EmptyNav = styled.div`
   color: rgba(0,0,0, .3);
 `
 
-const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter }) => {
+const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue }) => {
 
   return (
     <NavContainer>
@@ -124,7 +124,8 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
           filter
           orderByCreation={creationFilter}
           orderByUpdate={updateFilter}
-          orderByMarked={markedFilter} />
+          orderByMarked={markedFilter}
+          filterValue={filterValue} />
       </Toolbox>
     </NavContainer>
   )

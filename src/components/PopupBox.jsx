@@ -63,6 +63,9 @@ const PopupContainer = styled.div`
   }
 
   .fonction {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.65em;
     padding: 1em;
     color: rgba(0,0,0, .25);
@@ -84,7 +87,14 @@ const PopupContainer = styled.div`
 
 `
 
-const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByMarked }) => {
+const FilterIndicator = styled.div`
+  width: 5px;
+  height: 5px;
+  border-radius: 20px;
+  background-color: #ed6868;
+`
+
+const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByMarked, filterValue }) => {
 
   const [ showFilter, setShowFilter ] = useState(false)
   const [ shouldRender, setRender ] = useState(showFilter)
@@ -109,13 +119,13 @@ const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByMarked }) => 
               Order by :
             </div>
             <div className="fonction" onClick={orderByCreation}>
-              Creation Date
+              Creation Date {filterValue === "CREATION" && <FilterIndicator />}
             </div>
             <div className="fonction" onClick={orderByUpdate}>
-              Update Date
+              Update Date {filterValue === "UPDATE" && <FilterIndicator />}
             </div>
             <div className="fonction" onClick={orderByMarked}>
-              Marked
+              Marked  {filterValue === "MARKED" && <FilterIndicator />}
             </div>
         </PopupContainer>
       )}

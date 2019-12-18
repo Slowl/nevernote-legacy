@@ -26,6 +26,7 @@ const App = () => {
   const [ usedId, setExistingId ] = useState(undefined)
   const [ done, setReqState ] = useState(false)
   const [ action, setAction ] = useState('')
+  const [ filterIndicator, setFilterIndicator ] = useState('')
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -39,25 +40,28 @@ const App = () => {
         allNotes.push(reqData)
       })
       setData(allNotes.sort((a,b) => {
+        setFilterIndicator('UPDATE')
         return b.modifiedAt - a.modifiedAt
       }))
     })
   }
-
   const filterByModifDate = () => {
     setData([...data].sort((a,b) => {
+      setFilterIndicator('UPDATE')
       return b.modifiedAt - a.modifiedAt
     }))
   }
 
   const filterByCreaDate = () => {
     setData([...data].sort((a,b) => {
+      setFilterIndicator('CREATION')
       return b.createdAt - a.createdAt
     }))
   }
 
   const filterByMarked = () => {
     setData([...data].sort((a,b) => {
+      setFilterIndicator('MARKED')
       return b.marked - a.marked
     }))
   }
@@ -139,6 +143,7 @@ const App = () => {
         creationFilter={filterByCreaDate}
         updateFilter={filterByModifDate}
         markedFilter={filterByMarked}
+        filterValue={filterIndicator}
       />
       <NoteEditor
         onTitleChange={handleTitleChange}
