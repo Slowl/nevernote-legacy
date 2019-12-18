@@ -84,7 +84,7 @@ const PopupContainer = styled.div`
 
 `
 
-const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByTitle }) => {
+const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByMarked }) => {
 
   const [ showFilter, setShowFilter ] = useState(false)
   const [ shouldRender, setRender ] = useState(showFilter)
@@ -114,8 +114,8 @@ const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByTitle }) => {
             <div className="fonction" onClick={orderByUpdate}>
               Update Date
             </div>
-            <div className="fonction" onClick={orderByTitle}>
-              Title
+            <div className="fonction" onClick={orderByMarked}>
+              Marked
             </div>
         </PopupContainer>
       )}

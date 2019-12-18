@@ -14,6 +14,7 @@ const NotesContainer = styled.div`
   min-height: 100vh;
   max-height: 100vh;
   display: flex;
+  overflow: hidden;
 `
 
 const App = () => {
@@ -37,8 +38,28 @@ const App = () => {
         const reqData = items.data()
         allNotes.push(reqData)
       })
-      setData(allNotes.sort((a,b)=> a.modifiedAt > b.modifiedAt ? -1 : 1))
+      setData(allNotes.sort((a,b) => {
+        return b.modifiedAt - a.modifiedAt
+      }))
     })
+  }
+
+  const filterByModifDate = () => {
+    setData([...data].sort((a,b) => {
+      return b.modifiedAt - a.modifiedAt
+    }))
+  }
+
+  const filterByCreaDate = () => {
+    setData([...data].sort((a,b) => {
+      return b.createdAt - a.createdAt
+    }))
+  }
+
+  const filterByMarked = () => {
+    setData([...data].sort((a,b) => {
+      return b.marked - a.marked
+    }))
   }
 
   const Resetor = () => {
@@ -115,6 +136,9 @@ const App = () => {
         onNoteClick={handleNoteClick}
         onDeleteClick={handleDeleteNote}
         reset={() => Resetor()}
+        creationFilter={filterByCreaDate}
+        updateFilter={filterByModifDate}
+        markedFilter={filterByMarked}
       />
       <NoteEditor
         onTitleChange={handleTitleChange}
