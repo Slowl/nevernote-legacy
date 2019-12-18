@@ -18,6 +18,7 @@ const MainInput = styled.div`
   overflow: auto;
   overflow-wrap: break-word;
   color: rgba(0,0,0, .8);
+  cursor: text;
   scrollbar-color: rgba(0,0,0, .2) rgba(0,0,0,0);
   scrollbar-width: thin;
 
