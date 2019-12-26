@@ -13,6 +13,7 @@ const NavContainer = styled.div`
 
 const NoteContainer = styled.div`
   overflow-y: auto;
+  overflow-x: hidden;
   max-height: calc(100vh - 10.1em);
   min-height: calc(100vh - 10.1em);
   transition: all .3s;
