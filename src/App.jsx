@@ -120,9 +120,9 @@ const App = () => {
   }
 
   const handleDeleteNote = async (deleteId) => {
-    await handleToast('deleted', false)
+    await handleToast('Deleted', false)
     db.collection("notes").doc(deleteId).delete()
-    .then( () => deleteId === usedId ? (Requestor(), Resetor(), handleToast('deleted', true)) : Requestor(), handleToast('deleted', true))
+    .then( () => deleteId === usedId ? (Requestor(), Resetor(), handleToast('Deleted', true)) : Requestor(), handleToast('Deleted', true))
   }
 
   const handleToast = (text, reqState) => {
