@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 import firebase from './config/firebase'
+import { LIGHT, DARK } from './config/colors.js'
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
@@ -15,6 +16,8 @@ const NotesContainer = styled.div`
   max-height: 100vh;
   display: flex;
   overflow: hidden;
+  background-color: ${props => props.theme.white};
+  transition: all ease .4s;
 `
 
 const App = () => {
@@ -27,6 +30,8 @@ const App = () => {
   const [ done, setReqState ] = useState(false)
   const [ action, setAction ] = useState('')
   const [ filterIndicator, setFilterIndicator ] = useState('')
+  const [ theme, invertTheme ] = useState(LIGHT)
+  const [ isLight, invertValue ] = useState(true)
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -45,6 +50,7 @@ const App = () => {
       }))
     })
   }
+
   const filterByModifDate = () => {
     setData([...data].sort((a,b) => {
       setFilterIndicator('UPDATE')
@@ -133,30 +139,39 @@ const App = () => {
     }, 1500)
   }
 
+  const themeSwitcher = () => {
+    theme === LIGHT ? invertTheme(DARK) : invertTheme(LIGHT)
+    isLight === true ? invertValue(false) : invertValue(true)
+  }
+
   return (
-    <NotesContainer>
-      <NoteNav
-        data={data}
-        onNoteClick={handleNoteClick}
-        onDeleteClick={handleDeleteNote}
-        reset={() => Resetor()}
-        creationFilter={filterByCreaDate}
-        updateFilter={filterByModifDate}
-        markedFilter={filterByMarked}
-        filterValue={filterIndicator}
-      />
-      <NoteEditor
-        onTitleChange={handleTitleChange}
-        onNoteChange={handleNoteChange}
-        onClickMark={handleMark}
-        onClickSend={() => sendOrUpdate()}
-        note={note}
-        title={title}
-        marked={marked}
-        reqState={done}
-        action={action}
-       />
-    </NotesContainer>
+    <ThemeProvider theme={theme}>
+      <NotesContainer>
+        <NoteNav
+          data={data}
+          onNoteClick={handleNoteClick}
+          onDeleteClick={handleDeleteNote}
+          reset={() => Resetor()}
+          creationFilter={filterByCreaDate}
+          updateFilter={filterByModifDate}
+          markedFilter={filterByMarked}
+          filterValue={filterIndicator}
+          switchTheme={themeSwitcher}
+          themeValue={isLight}
+        />
+        <NoteEditor
+          onTitleChange={handleTitleChange}
+          onNoteChange={handleNoteChange}
+          onClickMark={handleMark}
+          onClickSend={() => sendOrUpdate()}
+          note={note}
+          title={title}
+          marked={marked}
+          reqState={done}
+          action={action}
+         />
+      </NotesContainer>
+    </ThemeProvider>
   )
 }
 

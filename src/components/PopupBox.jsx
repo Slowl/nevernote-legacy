@@ -3,17 +3,17 @@ import styled from 'styled-components'
 import { FiFilter } from "react-icons/fi"
 
 const ButtonContainer = styled.div`
-  padding: .8em .7em .2em;
+  padding: .75em .7em .25em;
   margin: 0 .2em;
   border-radius: 50px;
-  color: ${props => props.active ? 'rgba(0,0,0, .4)' : 'rgba(0,0,0, .2)'};
-  background-color: ${props => props.active && 'rgba(0,0,0,.05)'};
+  color: ${props => props.active ? `${props.theme.grey4}` : `${props.theme.grey2}`};
+  background-color: ${props => props.active && `${props.theme.grey05}`};
   cursor: pointer;
   transition: .3s;
 
   :hover {
-    background-color: rgba(0,0,0,.05);
-    color: rgba(0,0,0, .4);
+    background-color: ${props => props.theme.grey05};
+    color: ${props => props.theme.grey4};
   }
 `
 
@@ -23,11 +23,12 @@ const PopupContainer = styled.div`
   position: absolute;
   bottom: 70px;
   left: 15.5%;
-  box-shadow: 0px -1px 20px #ece7e7;
-  background-color: white;
+  border: ${props => `2px solid ${props.theme.lightCream}`};
+  background-color: ${props => props.theme.white};
   font-weight: 400;
   border-radius: 12px;
   cursor: default;
+  transition: all ease .4s;
   animation: ease ${props => props.show ? "show" : "hide"} .25s;
 
   @keyframes show {
@@ -55,9 +56,8 @@ const PopupContainer = styled.div`
   .title {
     font-size: 0.8em;
     padding: .8em;
-    color: rgba(0,0,0, .3);
-    background-color: rgba(0,0,0, .02);
-    ${'' /* border-bottom: 1px solid rgba(0,0,0, .06); */}
+    color: ${props => props.theme.grey3};
+    background-color: ${props => props.theme.grey02};
     border-radius: 12px 12px 0 0;
     letter-spacing: 1px;
   }
@@ -68,15 +68,15 @@ const PopupContainer = styled.div`
     align-items: center;
     font-size: 0.65em;
     padding: 1em;
-    color: rgba(0,0,0, .25);
+    color: ${props => props.theme.grey3};
     letter-spacing: 1px;
-    border-bottom: 1px solid rgba(0,0,0, .04);
+    border-bottom: 1px solid ${props => props.theme.grey04};
     cursor: pointer;
     transition: .3s;
 
     :hover {
-      color: rgba(0,0,0, .4);
-      background-color: rgba(0,0,0, .02);
+      color: ${props => props.theme.grey4};
+      background-color: ${props => props.theme.grey02};
     }
 
     :last-child {
@@ -91,7 +91,7 @@ const FilterIndicator = styled.div`
   width: 5px;
   height: 5px;
   border-radius: 20px;
-  background-color: #ed6868;
+  background-color: ${props => props.theme.redFlash};
 `
 
 const PopupBox = ({ filter, orderByCreation, orderByUpdate, orderByMarked, filterValue }) => {

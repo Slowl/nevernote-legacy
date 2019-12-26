@@ -14,12 +14,18 @@ const Title = styled.input`
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;
-  color: rgba(0,0,0, .8);
+  color: ${props => props.theme.grey8};
+  background-color: ${props => props.theme.white};
   border: 0;
-  transition: ease-in .2s;
+  transition: all ease .4s;
 
   :focus {
     outline: 0;
+  }
+
+  ::placeholder {
+    color: ${props => props.theme.placeholder};
+    opacity: 1;
   }
 `
 
@@ -34,14 +40,14 @@ const DarkMark = styled.div`
     height: 35px;
     margin: .25em;
     border-radius: 30px;
-    background-color: #555555;
+    background-color: ${props => props.theme.grey};
     box-sizing: border-box;
-    border: ${props => props.isSelected ? '0px solid rgba(255,255,255, .6);' : '4px solid rgba(255,255,255, .6);'};
+    border: ${props => props.isSelected ? `0px solid ${props.theme.white6};` : `4px solid ${props.theme.white6};`};
     cursor: pointer;
-    transition: linear .15s;
+    transition:  .15s;
 
     :hover {
-      border: 4px solid rgba(255,255,255, .6);
+      border: 4px solid ${props => props.theme.white6};
     }
 `
 
@@ -50,14 +56,14 @@ const RedMark = styled.div`
     height: 35px;
     margin: .25em;
     border-radius: 30px;
-    background-color: #ed6868 ;
+    background-color: ${props => props.theme.redFlash} ;
     box-sizing: border-box;
-    border: ${props => props.isSelected ? '4px solid rgba(255,255,255, .6)' : '0px solid rgba(255,255,255, .6)'};
+    border: ${props => props.isSelected ? `4px solid ${props.theme.white6}` : `0px solid ${props.theme.white6}`};
     cursor: pointer;
-    transition: linear .15s;
+    transition:  .15s;
 
     :hover {
-      border: 4px solid rgba(255,255,255, .6);
+      border: 4px solid ${props => props.theme.white6};
     }
 `
 

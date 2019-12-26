@@ -9,7 +9,7 @@ const NoteContainer = styled.div`
   max-width: 90%;
   margin: 1em auto;
   border-radius: 0 5px 5px 0;
-  border-left: ${props => props.isMarked ? '1px solid rgba(255, 0, 0, 0.7)' : '1px solid rgba(0,0,0, .3)'};
+  border-left: ${props => props.isMarked ? `1px solid ${props.theme.red}` : `1px solid ${props.theme.grey3}`};
   display:flex;
   justify-content: space-between;
 
@@ -38,7 +38,8 @@ const ContentContainer = styled.div`
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    color: rgba(0,0,0, .7)
+    color: ${props => props.theme.grey7};
+    transition: all ease .4s;
   }
 
   .content {
@@ -48,11 +49,12 @@ const ContentContainer = styled.div`
     letter-spacing: 1px;
     word-spacing: 1px;
     overflow: hidden;
-    color: rgba(0,0,0, .4);
+    color: ${props => props.theme.grey4};
     position: relative;
     max-height: 5em;
     min-height: 5em;
     height: 5em;
+    transition: all ease .4s;
       :after {
         content: "";
         text-align: right;
@@ -61,15 +63,16 @@ const ContentContainer = styled.div`
         right: 0;
         width: 40%;
         height: 20px;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0.3), #fafafa 50%);
+        transition: all ease .4s;
+        ${'' /* background: linear-gradient(to right, ${props => props.theme.white3}, ${props => props.theme.cream} 50%); */}
       }
     }
   }
 `
 
 const Delete = styled.div`
-  background-color: #fcdfdf;
-  color: rgba(255,255,255, 1);
+  background-color: ${props => props.theme.salmon};
+  color: ${props => props.theme.white};
   border-radius: 0 5px 5px 0;
   padding: 2.1em .3em;
   font-size: 1.5em;
@@ -78,7 +81,7 @@ const Delete = styled.div`
   transition: .3s;
 
   :hover {
-    background-color: #ffb1b1;
+    background-color: ${props => props.theme.redLight};
   }
 
   ${NoteContainer}:hover & {

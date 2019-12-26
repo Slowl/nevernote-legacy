@@ -1,13 +1,14 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, {withTheme} from 'styled-components'
 import Note from './Note'
 import PopupBox from './PopupBox'
-import { FiPlus } from "react-icons/fi"
+import { FiPlus, FiSun, FiMoon } from "react-icons/fi"
 
 const NavContainer = styled.div`
   max-width: 25vw;
   min-width: 25vw;
-  background-color: rgba(0,0,0,.02);
+  background-color: ${props => props.theme.grey02};
+  transition: all ease .4s;
 `
 
 const NoteContainer = styled.div`
@@ -15,7 +16,7 @@ const NoteContainer = styled.div`
   max-height: calc(100vh - 10.1em);
   min-height: calc(100vh - 10.1em);
   transition: all .3s;
-  scrollbar-color: rgba(0,0,0, .05) rgba(0,0,0,0);
+  scrollbar-color: ${props => props.theme.grey05} rgba(0,0,0,0);
   scrollbar-width: thin;
 
   ::-webkit-scrollbar {
@@ -26,18 +27,18 @@ const NoteContainer = styled.div`
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(0,0,0, .05);
+    background: ${props => props.theme.grey05};
     border: 0px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0,0,0, .08);
+    background: ${props => props.theme.grey08};
   }
   ::-webkit-scrollbar-thumb:active {
-    background: rgba(0,0,0, .08);
+    background: ${props => props.theme.grey08};
   }
   ::-webkit-scrollbar-track {
     background: #rgba(0,0,0,0);
-    border: 0px none #ffffff;
+    border: 0px none ${props => props.theme.white};
   }
   ::-webkit-scrollbar-track:hover {
     background: rgba(0,0,0,0);
@@ -56,16 +57,16 @@ const New = styled.div`
   padding: .4em 0 .3em;
   text-align: center;
   font-size: 1.5em;
-  color: rgba(0,0,0, .3);
-  background-color: rgba(255,255,255,1);
-  border: 1px solid rgba(0,0,0, .07);
+  color: ${props => props.theme.grey3};
+  background-color: ${props => props.theme.white};
+  border: 1px solid ${props => props.theme.grey07};
   border-radius: 40px;
   cursor: pointer;
-  transition: .3s;
+  transition: .4s;
 
   :hover {
-    border: 1px solid rgba(0,0,0, .15);
-    color: rgba(0,0,0, .7);
+    border: 1px solid ${props => props.theme.grey1bis};
+    color: ${props => props.theme.grey7};
   }
 `
 
@@ -75,7 +76,7 @@ const Toolbox = styled.div`
   width: 100%;;
   text-align: center;
   box-sizing: border-box;
-  border-right: 1px solid rgba(0,0,0,.05);
+  border-right: 1px solid ${props => props.theme.grey05};
   font-size: 1.6em;
   font-weight: 500;
   display: flex;
@@ -88,10 +89,29 @@ const EmptyNav = styled.div`
   font-size: 1.3em;
   padding: 1em;
   text-align: center;
-  color: rgba(0,0,0, .3);
+  color: ${props => props.theme.grey3};
 `
 
-const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue }) => {
+const Button = styled.div`
+  padding: .7em .7em .3em;
+  margin: 0 .2em;
+  border-radius: 50px;
+  color: ${props => props.active ? `${props.theme.grey4}` : `${props.theme.grey2}`};
+  background-color: ${props => props.active && `${props.theme.grey05}`};
+  cursor: pointer;
+  transition: .3s;
+
+  :hover {
+    background-color: ${props => props.theme.grey05};
+    color: ${props => props.theme.grey4};
+  }
+`
+
+const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue }) => {
+
+  const Test = () => {
+    console.log("test")
+  }
 
   return (
     <NavContainer>
@@ -120,6 +140,9 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
       )}
     </NoteContainer>
       <Toolbox>
+        <Button onClick={() => switchTheme()}>
+          {themeValue === true ? <FiMoon /> : <FiSun />}
+        </Button>
         <PopupBox
           filter
           orderByCreation={creationFilter}
@@ -131,4 +154,4 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
   )
 }
 
-export default NoteNav
+export default withTheme(NoteNav)

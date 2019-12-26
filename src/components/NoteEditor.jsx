@@ -12,12 +12,13 @@ const EditorContainer = styled.div`
   max-height: 100vh;
   min-height: 100vh;
   overflow-y: hidden;
+  transition: all ease .4s;
 `
 const Button = styled.div`
   padding: .6em 0 .4em;
   width: 100%;
-  border-top: 1px solid rgba(0,0,0,.08);
-  color: rgba(0,0,0, .3);
+  border-top: 1px solid ${props => props.theme.grey08};
+  color: ${props => props.theme.grey3};
   text-align: center;
   box-sizing: border-box;
   font-size: 2.2em;
@@ -26,9 +27,9 @@ const Button = styled.div`
   transition: .4s;
 
   :hover {
-    background-color: rgba(0,0,0,.04);
-    border-top: 1px solid rgba(0,0,0,.01);
-    color: rgba(0,0,0, .8);
+    background-color: ${props => props.theme.grey04};
+    border-top: 1px solid ${props => props.theme.grey01};
+    color: ${props => props.theme.grey8};
   }
 `
 

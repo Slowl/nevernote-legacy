@@ -17,10 +17,11 @@ const MainInput = styled.div`
   word-spacing: 2px;
   overflow: auto;
   overflow-wrap: break-word;
-  color: rgba(0,0,0, .8);
+  color: ${props => props.theme.grey8};
   cursor: text;
-  scrollbar-color: rgba(0,0,0, .2) rgba(0,0,0,0);
+  scrollbar-color: ${props => props.theme.grey2} rgba(0,0,0,0);
   scrollbar-width: thin;
+  transition: all ease .4s;
 
   ::-webkit-scrollbar {
     width: 10px;
@@ -30,18 +31,18 @@ const MainInput = styled.div`
     height: 0px;
   }
   ::-webkit-scrollbar-thumb {
-    background: rgba(0,0,0, .1);
+    background: ${props => props.theme.grey1};
     border: 0px;
   }
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(0,0,0, .2);
+    background: ${props => props.theme.grey2};
   }
   ::-webkit-scrollbar-thumb:active {
-    background: rgba(0,0,0, .2);
+    background: ${props => props.theme.grey2};
   }
   ::-webkit-scrollbar-track {
     background: #rgba(0,0,0,0);
-    border: 0px none #ffffff;
+    border: 0px none ${props => props.theme.white};
   }
   ::-webkit-scrollbar-track:hover {
     background: rgba(0,0,0,0);
@@ -59,7 +60,7 @@ const MainInput = styled.div`
 
   :empty:before{
     content: 'write your note ...';
-    color: #979797;
+    color: ${props => props.theme.lightGrey};
 }
 `
 
