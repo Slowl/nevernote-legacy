@@ -85,6 +85,13 @@ const PopupContainer = styled.div`
     }
   }
 
+  @media screen and (max-width: 45em) {
+    width: 11em;
+    max-height: 45%;
+    bottom: 85px;
+    left: 15%;
+ }
+
 `
 
 const FilterIndicator = styled.div`

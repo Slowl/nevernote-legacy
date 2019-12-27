@@ -2,13 +2,20 @@ import React from 'react'
 import styled from 'styled-components'
 import Note from './Note'
 import PopupBox from './PopupBox'
-import { FiPlus, FiSun, FiMoon } from "react-icons/fi"
+import { FiPlus, FiSun, FiMoon, FiChevronRight } from "react-icons/fi"
 
 const NavContainer = styled.div`
   max-width: 25vw;
   min-width: 25vw;
-  background-color: ${props => props.theme.grey02};
+  background-color: ${props => props.theme.navbg};
   transition: all ease .4s;
+  @media screen and (max-width: 45em) {
+    position: absolute;
+    transform: ${props => props.slided ? "translateX(0px)" : "translateX(-425px)"};
+    max-width: 100vw;
+    min-width: 100vw;
+    transition: .7s;
+ }
 `
 
 const NoteContainer = styled.div`
@@ -107,11 +114,29 @@ const Button = styled.div`
     color: ${props => props.theme.grey4};
   }
 `
+const SwipeIndicator = styled.div`
+  position: absolute;
+  background-color: ${props => props.theme.navbg};
+  border-radius: 40px;
+  width: 25px;
+  height: 25px;
+  right: ${props => props.open ? "0px" : "-70px"};;
+  top: 50%;
+  transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
+  transition: .5s;
 
-const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue }) => {
+  svg {
+    padding: .12em .1em .1em .25em;
+    color: ${props => props.theme.grey6};
+    font-size: 1.15em;
+  }
+`
+
+const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue, swipe }) => {
 
   return (
-    <NavContainer>
+    <NavContainer slided={swipe}>
+      <SwipeIndicator open={swipe}><FiChevronRight /></SwipeIndicator>
       <New onClick={reset}> <FiPlus /> </New>
       <NoteContainer>
         {(!!data && data.length === 0) && <EmptyNav> No notes to display ... </EmptyNav>}

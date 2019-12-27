@@ -68,6 +68,20 @@ const ContentContainer = styled.div`
       }
     }
   }
+
+  @media screen and (max-width: 45em) {
+    width: 70vw;
+    min-width: 70vw;
+    max-width: 70vw;
+
+    .title {
+      font-size: 1.2em;
+    }
+
+    .content {
+      letter-spacing: 0px;
+    }
+ }
 `
 
 const Delete = styled.div`

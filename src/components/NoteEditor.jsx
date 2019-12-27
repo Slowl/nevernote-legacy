@@ -13,6 +13,10 @@ const EditorContainer = styled.div`
   min-height: 100vh;
   overflow-y: hidden;
   transition: all ease .4s;
+  @media screen and (max-width: 45em) {
+    max-width: 100vw;
+    min-width: 100vw;
+ }
 `
 const Button = styled.div`
   padding: .6em 0 .4em;

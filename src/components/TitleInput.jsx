@@ -27,12 +27,24 @@ const Title = styled.input`
     color: ${props => props.theme.placeholder};
     opacity: 1;
   }
+
+  @media screen and (max-width: 45em) {
+    width: calc(100% - (110px - 1em));
+    font-size: 1.35em;
+    letter-spacing: 0px;
+ }
 `
 
 const Picker = styled.div`
   display: flex;
   padding-top: 1.4em;
   padding-right: 1.5em;
+
+  @media screen and (max-width: 45em) {
+    flex-direction: row;
+    padding-top: .5em;
+    padding-right: .5em;
+ }
 `
 
 const DarkMark = styled.div`

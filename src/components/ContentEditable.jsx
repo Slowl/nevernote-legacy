@@ -23,6 +23,12 @@ const MainInput = styled.div`
   scrollbar-width: thin;
   transition: all ease .4s;
 
+  @media screen and (max-width: 45em) {
+    font-size: 1.2em;
+    letter-spacing: 0px;
+    word-spacing: 1px;
+ }
+
   ::-webkit-scrollbar {
     width: 10px;
   }
