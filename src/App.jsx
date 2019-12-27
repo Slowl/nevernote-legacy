@@ -4,6 +4,7 @@ import firebase from './config/firebase'
 import { LIGHT, DARK } from './config/colors.js'
 import localforage from 'localforage'
 import Swipe from 'react-easy-swipe'
+import { FiChevronRight } from "react-icons/fi"
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
@@ -22,6 +23,30 @@ const NotesContainer = styled.div`
   transition: all ease .4s;
 `
 
+const SwipeIndicator = styled.div`
+  display: none;
+
+  @media screen and (max-width: 45em) {
+    z-index: 999;
+    display: block;
+    position: absolute;
+    background-color: ${props => props.theme.navbg};
+    border-radius: 40px;
+    width: 25px;
+    height: 25px;
+    left: ${props => props.open ? `calc(${props.windowWidth}px - 30px)` : `-4px`};
+    top: 50%;
+    transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
+    transition: .6s;
+
+    svg {
+      padding: .12em .1em .1em .25em;
+      color: ${props => props.theme.grey6};
+      font-size: 1.15em;
+    }
+  }
+`
+
 const App = () => {
 
   const [ title, setTitle ] = useState('')
@@ -35,6 +60,7 @@ const App = () => {
   const [ theme, setTheme ] = useState(DARK)
   const [ isLight, invertValue ] = useState(false)
   const [ isSwiped, setSwipe ] = useState(false)
+  const [ windowWidth, setWindowsWidth ] = useState(0)
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -56,6 +82,7 @@ const App = () => {
 
   useEffect(() => {
     Requestor()
+    setWindowsWidth(window.innerWidth)
     localforage.getItem('localTheme').then(val => {
       val !== null && setTheme(val)
       if(JSON.stringify(val) === JSON.stringify(DARK)){
@@ -179,6 +206,7 @@ const App = () => {
         tolerance={100}
         >
         <NotesContainer>
+          <SwipeIndicator open={isSwiped} windowWidth={windowWidth}><FiChevronRight /></SwipeIndicator>
           <NoteNav
             data={data}
             onNoteClick={handleNoteClick}
@@ -191,6 +219,7 @@ const App = () => {
             switchTheme={themeSwitcher}
             themeValue={isLight}
             swipe={isSwiped}
+            windowWidth={windowWidth}
           />
           <NoteEditor
             onTitleChange={handleTitleChange}
