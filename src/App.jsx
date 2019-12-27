@@ -3,6 +3,7 @@ import styled, { ThemeProvider } from 'styled-components'
 import firebase from './config/firebase'
 import { LIGHT, DARK } from './config/colors.js'
 import localforage from 'localforage'
+import Swipe from 'react-easy-swipe'
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
@@ -33,6 +34,7 @@ const App = () => {
   const [ filterIndicator, setFilterIndicator ] = useState('')
   const [ theme, setTheme ] = useState(DARK)
   const [ isLight, invertValue ] = useState(false)
+  const [ isSwiped, setSwipe ] = useState(false)
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -104,6 +106,14 @@ const App = () => {
     setExistingId(undefined)
   }
 
+  const onSwipeRight = () => {
+    setSwipe(true)
+  }
+
+  const onSwipeLeft = () => {
+    setSwipe(false)
+  }
+
   const handleTitleChange = e => {
     setTitle(e.target.value.toUpperCase())
   }
@@ -144,6 +154,7 @@ const App = () => {
     setNote(clickedNote)
     setMark(clickedMark)
     setExistingId(clickedId)
+    onSwipeLeft()
   }
 
   const handleDeleteNote = async (deleteId) => {
@@ -162,31 +173,39 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <NotesContainer>
-        <NoteNav
-          data={data}
-          onNoteClick={handleNoteClick}
-          onDeleteClick={handleDeleteNote}
-          reset={() => Resetor()}
-          creationFilter={filterByCreaDate}
-          updateFilter={filterByModifDate}
-          markedFilter={filterByMarked}
-          filterValue={filterIndicator}
-          switchTheme={themeSwitcher}
-          themeValue={isLight}
-        />
-        <NoteEditor
-          onTitleChange={handleTitleChange}
-          onNoteChange={handleNoteChange}
-          onClickMark={handleMark}
-          onClickSend={() => sendOrUpdate()}
-          note={note}
-          title={title}
-          marked={marked}
-          reqState={done}
-          action={action}
-         />
-      </NotesContainer>
+      <Swipe
+        onSwipeLeft={onSwipeLeft}
+        onSwipeRight={onSwipeRight}
+        tolerance={100}
+        >
+        <NotesContainer>
+          <NoteNav
+            data={data}
+            onNoteClick={handleNoteClick}
+            onDeleteClick={handleDeleteNote}
+            reset={() => Resetor()}
+            creationFilter={filterByCreaDate}
+            updateFilter={filterByModifDate}
+            markedFilter={filterByMarked}
+            filterValue={filterIndicator}
+            switchTheme={themeSwitcher}
+            themeValue={isLight}
+            swipe={isSwiped}
+          />
+          <NoteEditor
+            onTitleChange={handleTitleChange}
+            onNoteChange={handleNoteChange}
+            onClickMark={handleMark}
+            onClickSend={() => sendOrUpdate()}
+            note={note}
+            title={title}
+            marked={marked}
+            reqState={done}
+            action={action}
+           />
+        </NotesContainer>
+      </Swipe>
+
     </ThemeProvider>
   )
 }
