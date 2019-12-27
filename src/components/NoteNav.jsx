@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, {withTheme} from 'styled-components'
+import styled from 'styled-components'
 import Note from './Note'
 import PopupBox from './PopupBox'
 import { FiPlus, FiSun, FiMoon } from "react-icons/fi"
@@ -110,10 +110,6 @@ const Button = styled.div`
 
 const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue }) => {
 
-  const Test = () => {
-    console.log("test")
-  }
-
   return (
     <NavContainer>
       <New onClick={reset}> <FiPlus /> </New>
@@ -142,7 +138,7 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
     </NoteContainer>
       <Toolbox>
         <Button onClick={() => switchTheme()}>
-          {themeValue === true ? <FiMoon /> : <FiSun />}
+          {!!themeValue ? <FiMoon /> : <FiSun />}
         </Button>
         <PopupBox
           filter
@@ -155,4 +151,4 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
   )
 }
 
-export default withTheme(NoteNav)
+export default NoteNav

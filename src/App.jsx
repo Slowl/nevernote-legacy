@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
 import firebase from './config/firebase'
 import { LIGHT, DARK } from './config/colors.js'
+import localforage from 'localforage'
 
 import NoteNav from './components/NoteNav'
 import NoteEditor from './components/NoteEditor'
@@ -30,8 +31,8 @@ const App = () => {
   const [ done, setReqState ] = useState(false)
   const [ action, setAction ] = useState('')
   const [ filterIndicator, setFilterIndicator ] = useState('')
-  const [ theme, invertTheme ] = useState(LIGHT)
-  const [ isLight, invertValue ] = useState(true)
+  const [ theme, setTheme ] = useState(DARK)
+  const [ isLight, invertValue ] = useState(false)
 
   const db = firebase.firestore()
   const notes = db.collection('notes')
@@ -49,6 +50,31 @@ const App = () => {
         return b.modifiedAt - a.modifiedAt
       }))
     })
+  }
+
+  useEffect(() => {
+    Requestor()
+    localforage.getItem('localTheme').then(val => {
+      val !== null && setTheme(val)
+      if(JSON.stringify(val) === JSON.stringify(DARK)){
+        invertValue(false)
+      } else {
+        invertValue(true)
+      }
+    })
+    // eslint-disable-next-line
+  }, [])
+
+  const themeSwitcher = () => {
+    if(JSON.stringify(theme) === JSON.stringify(DARK)){
+      setTheme(LIGHT)
+      invertValue(true)
+      localforage.setItem('localTheme', LIGHT)
+    } else {
+      setTheme(DARK)
+      invertValue(false)
+      localforage.setItem('localTheme', DARK)
+    }
   }
 
   const filterByModifDate = () => {
@@ -77,11 +103,6 @@ const App = () => {
     setNote('')
     setExistingId(undefined)
   }
-
-  useEffect(() => {
-    Requestor()
-    // eslint-disable-next-line
-  }, [])
 
   const handleTitleChange = e => {
     setTitle(e.target.value.toUpperCase())
@@ -137,11 +158,6 @@ const App = () => {
     setTimeout(() => {
       setReqState(!reqState)
     }, 1500)
-  }
-
-  const themeSwitcher = () => {
-    theme === LIGHT ? invertTheme(DARK) : invertTheme(LIGHT)
-    isLight === true ? invertValue(false) : invertValue(true)
   }
 
   return (
