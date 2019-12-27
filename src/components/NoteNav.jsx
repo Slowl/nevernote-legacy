@@ -115,21 +115,27 @@ const Button = styled.div`
   }
 `
 const SwipeIndicator = styled.div`
-  position: absolute;
-  background-color: ${props => props.theme.navbg};
-  border-radius: 40px;
-  width: 25px;
-  height: 25px;
-  right: ${props => props.open ? "0px" : "-70px"};;
-  top: 50%;
-  transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
-  transition: .5s;
+  display: none;
 
-  svg {
-    padding: .12em .1em .1em .25em;
-    color: ${props => props.theme.grey6};
-    font-size: 1.15em;
+  @media screen and (max-width: 45em) {
+    display: block;
+    position: absolute;
+    background-color: ${props => props.theme.navbg};
+    border-radius: 40px;
+    width: 25px;
+    height: 25px;
+    right: ${props => props.open ? "0px" : "-70px"};;
+    top: 50%;
+    transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
+    transition: .5s;
+
+    svg {
+      padding: .12em .1em .1em .25em;
+      color: ${props => props.theme.grey6};
+      font-size: 1.15em;
+    }
   }
+
 `
 
 const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue, swipe }) => {
