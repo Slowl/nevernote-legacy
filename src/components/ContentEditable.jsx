@@ -15,7 +15,8 @@ const MainInput = styled.div`
   font-size: 1.4em;
   letter-spacing: 1px;
   word-spacing: 2px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   overflow-wrap: break-word;
   color: ${props => props.theme.grey8};
   cursor: text;
