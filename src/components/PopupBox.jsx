@@ -21,8 +21,8 @@ const PopupContainer = styled.div`
   width: 10em;
   max-height: 30%;
   position: absolute;
-  bottom: 70px;
-  left: 15.5%;
+  bottom: 90px;
+  right: 67%;
   border: ${props => `2px solid ${props.theme.lightCream}`};
   background-color: ${props => props.theme.white};
   font-weight: 400;
@@ -89,7 +89,7 @@ const PopupContainer = styled.div`
     width: 11em;
     max-height: 45%;
     bottom: 85px;
-    left: 15%;
+    right: 10px;
  }
 
 `
