@@ -77,29 +77,37 @@ export default class ContentEditable extends React.Component {
         return nextProps.html !== this.noteInputRef.innerHTML
     }
 
-    componentDidUpdate() {
-      if ( this.props.html !== this.noteInputRef.innerHTML ) {
-         this.noteInputRef.innerHTML = this.props.html
-      }
+  componentDidUpdate() {
+    if ( this.props.html !== this.noteInputRef.innerHTML ) {
+       this.noteInputRef.innerHTML = this.props.html
     }
+  }
 
- emitChange = () => {
-        const html = this.noteInputRef.innerHTML
-        if (this.props.onChange && html !== this.lastHtml) {
-            this.props.onChange({
-                target: {
-                    value: html
-                }
-            })
-        }
-        this.lastHtml = html
-}
+  emitChange = () => {
+    const html = this.noteInputRef.innerHTML
+    if (this.props.onChange && html !== this.lastHtml) {
+        this.props.onChange({
+            target: {
+                value: html
+            }
+        })
+    }
+    this.lastHtml = html
+  }
+
+  handlePaste = e => {
+    e.persist()
+    e.preventDefault()
+    const textToPaste = (e.originalEvent || e).clipboardData.getData('text/plain')
+    document.execCommand("insertText", false, textToPaste)
+  }
 
 render() {
     return(
       <MainInput ref={(ref) => {this.noteInputRef = ref} }
             onInput={this.emitChange}
             onBlur={this.emitChange}
+            onPaste={this.handlePaste}
             contentEditable
             >{this.props.value}</MainInput>
     )
