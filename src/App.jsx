@@ -27,7 +27,7 @@ const SwipeIndicator = styled.div`
   display: none;
 
   @media screen and (max-width: 45em) {
-    z-index: 999;
+    z-index: 1000;
     display: block;
     position: absolute;
     background-color: ${props => props.theme.navbg};

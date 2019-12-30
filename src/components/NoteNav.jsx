@@ -15,6 +15,7 @@ const NavContainer = styled.div`
     max-width: 100vw;
     min-width: 100vw;
     transition: .7s;
+    z-index: 999;
  }
 `
 
