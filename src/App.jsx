@@ -131,6 +131,7 @@ const App = () => {
     setTitle('')
     setNote('')
     setExistingId(undefined)
+    onSwipeLeft()
   }
 
   const onSwipeRight = () => {
