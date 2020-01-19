@@ -30,14 +30,14 @@ const SwipeIndicator = styled.div`
     z-index: 1000;
     display: block;
     position: absolute;
-    background-color: ${props => props.theme.navbg};
+    background-color: ${props => props.open ? `${props.theme.navbg}` : `${props.theme.white}`};
     border-radius: 40px;
     width: 25px;
     height: 25px;
     left: ${props => props.open ? `calc(${props.windowWidth}px - 30px)` : `-4px`};
     top: 50%;
     transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
-    transition: .6s;
+    transition: all .6s;
 
     svg {
       padding: .12em .1em .1em .25em;
