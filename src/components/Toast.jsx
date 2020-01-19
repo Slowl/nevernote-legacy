@@ -30,6 +30,7 @@ const ToastContainer =styled.div`
     padding: .6em 1em;
     font-size: 1em;
     letter-spacing: 1px;
+    z-index: 999;
  }
 `
 
