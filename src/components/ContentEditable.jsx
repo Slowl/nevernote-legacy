@@ -28,6 +28,7 @@ const MainInput = styled.div`
     font-size: 1.2em;
     letter-spacing: 0px;
     word-spacing: 1px;
+    height: calc(100% - 6.7em);
  }
 
   ::-webkit-scrollbar {
