@@ -46,7 +46,7 @@ const NoteContainer = styled.div`
     background: ${props => props.theme.grey08};
   }
   ::-webkit-scrollbar-track {
-    background: #rgba(0,0,0,0);
+    background: rgba(0,0,0,0);
     border: 0px none ${props => props.theme.white};
   }
   ::-webkit-scrollbar-track:hover {

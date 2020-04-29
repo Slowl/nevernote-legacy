@@ -16,6 +16,7 @@ const EditorContainer = styled.div`
   @media screen and (max-width: 45em) {
     max-width: 100vw;
     min-width: 100vw;
+    overflow-x: hidden;
  }
 `
 const Button = styled.div`
