@@ -17,7 +17,7 @@ const ToastContainer =styled.div`
   font-size: 1.2em;
   letter-spacing: 2px;
   box-shadow: ${props => props.theme.grey1} 0px 0px 20px 3px;
-  transform: ${props => props.isDone ? 'translateY(5px)' : 'translateY(-75px)'};
+  transform: ${props => props.isDone ? 'translateY(10px)' : 'translateY(-75px)'};
   transition: .3s;
   svg {
     font-size: 1.2em;

@@ -6,29 +6,22 @@ const MainInput = styled.div`
   box-sizing: border-box;
   min-width: 100%;
   max-width: 100%;
-  height: calc(100% - 8.1em);
+  height: calc(100% - 9.2em);
   border: 0;
   padding: .5em 1.5em 0em 1.5em;
   resize: none;
   font-family: 'Hind Madurai', sans-serif;
-  font-weight: 300;
-  font-size: 1.13em;
-  letter-spacing: 1px;
-  word-spacing: 2px;
   overflow-x: hidden;
   overflow-y: auto;
   overflow-wrap: break-word;
   color: ${props => props.theme.grey8};
   cursor: text;
   scrollbar-color: ${props => props.theme.grey2} rgba(0,0,0,0);
-  scrollbar-width: thin;
+  scrollbar-with: thin;
   transition: all ease .4s;
 
   @media screen and (max-width: 45em) {
-    font-size: 1.2em;
-    letter-spacing: 0px;
-    word-spacing: 1px;
-    height: calc(100% - 6.7em);
+    height: calc(100% - 8.1em);
  }
 
   ::-webkit-scrollbar {
@@ -72,6 +65,18 @@ const MainInput = styled.div`
 }
 `
 
+const TextContainer = styled.span`
+  font-weight: 300;
+  font-size: 1.13em;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  @media screen and (max-width: 45em) {
+    font-size: 1.1em;
+    letter-spacing: 0px;
+    word-spacing: 1px;
+ }
+`
+
 export default class ContentEditable extends React.Component {
 
   shouldComponentUpdate(nextProps){
@@ -105,12 +110,14 @@ export default class ContentEditable extends React.Component {
 
 render() {
     return(
-      <MainInput ref={(ref) => {this.noteInputRef = ref} }
-            onInput={this.emitChange}
-            onBlur={this.emitChange}
-            onPaste={this.handlePaste}
-            contentEditable
-            >{this.props.value}</MainInput>
+      <MainInput
+        ref={(ref) => {this.noteInputRef = ref} }
+        onInput={this.emitChange}
+        onBlur={this.emitChange}
+        onPaste={this.handlePaste}
+        contentEditable>
+        <TextContainer>{this.props.value}</TextContainer>
+      </MainInput>
     )
   }
 }
