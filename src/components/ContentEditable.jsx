@@ -6,13 +6,13 @@ const MainInput = styled.div`
   box-sizing: border-box;
   min-width: 100%;
   max-width: 100%;
-  height: calc(100% - 7em);
+  height: calc(100% - 8.1em);
   border: 0;
   padding: .5em 1.5em 0em 1.5em;
   resize: none;
-  font-family: 'Montserrat', sans-serif;;
-  font-weight: 400;
-  font-size: 1.4em;
+  font-family: 'Hind Madurai', sans-serif;
+  font-weight: 300;
+  font-size: 1.13em;
   letter-spacing: 1px;
   word-spacing: 2px;
   overflow-x: hidden;

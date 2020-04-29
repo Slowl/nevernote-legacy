@@ -9,8 +9,8 @@ const Title = styled.input`
   box-sizing: border-box;
   width: 100%;
   padding: .5em 1em;
-  font-size: 1.6em;
-  font-family: 'Montserrat', sans-serif;
+  font-size: 1.2em;
+  font-family: 'Hind Madurai', sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
   text-transform: uppercase;

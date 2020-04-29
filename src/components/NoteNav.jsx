@@ -95,7 +95,7 @@ const Toolbox = styled.div`
 const EmptyNav = styled.div`
   width: 80%;
   margin: auto;
-  font-size: 1.3em;
+  font-size: 1.1em;
   padding: 1em;
   text-align: center;
   color: ${props => props.theme.grey3};

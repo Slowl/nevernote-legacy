@@ -25,7 +25,7 @@ const PopupContainer = styled.div`
   right: 67%;
   border: ${props => `2px solid ${props.theme.lightCream}`};
   background-color: ${props => props.theme.white};
-  font-weight: 400;
+  font-weight: 300;
   border-radius: 12px;
   cursor: default;
   transition: all ease .4s;

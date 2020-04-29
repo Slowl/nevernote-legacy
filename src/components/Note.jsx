@@ -4,7 +4,7 @@ import { FiX } from "react-icons/fi"
 import ReactHtmlParser from 'react-html-parser';
 
 const NoteContainer = styled.div`
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Hind Madurai', sans-serif;
   min-width: 90%;
   max-width: 90%;
   margin: 1em auto;
@@ -44,7 +44,7 @@ const ContentContainer = styled.div`
 
   .content {
     padding-left: .3em;
-    font-weight: 400;
+    font-weight: 300;
     font-size: 1.1em;
     letter-spacing: 1px;
     word-spacing: 1px;
