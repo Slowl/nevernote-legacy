@@ -34,7 +34,7 @@ const SwipeIndicator = styled.div`
     border-radius: 40px;
     width: 25px;
     height: 25px;
-    left: ${props => props.open ? `calc(${props.windowWidth}px - 30px)` : `-4px`};
+    right: ${props => props.open ? `-4px` : `calc(${props.windowWidth}px - 30px)`};
     top: 50%;
     transform: ${props => props.open ? "rotate(180deg)" : "rotate(0deg)"};
     transition: all .6s;
@@ -59,7 +59,7 @@ const App = () => {
   const [ filterIndicator, setFilterIndicator ] = useState('')
   const [ theme, setTheme ] = useState(DARK)
   const [ isLight, invertValue ] = useState(false)
-  const [ isSwiped, setSwipe ] = useState(false)
+  const [ isSwiped, setSwipe ] = useState(true)
   const [ windowWidth, setWindowsWidth ] = useState(0)
 
   const db = firebase.firestore()
