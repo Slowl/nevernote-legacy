@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import Note from './Note'
 import PopupBox from './PopupBox'
 import { FiPlus, FiSun, FiMoon } from "react-icons/fi"
+import { AiOutlineLogout } from "react-icons/ai"
+import { useNavigate } from "@reach/router"
 
 const NavContainer = styled.div`
   max-width: 25vw;
@@ -82,14 +84,14 @@ const New = styled.div`
 const Toolbox = styled.div`
   height: 3.4em;
   padding: .5em .3em;
-  width: 100%;;
+  width: 100%;
   text-align: center;
   box-sizing: border-box;
   border-right: 1px solid ${props => props.theme.grey05};
   font-size: 1.6em;
   font-weight: 500;
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
 `
 
 const EmptyNav = styled.div`
@@ -116,7 +118,27 @@ const Button = styled.div`
   }
 `
 
-const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, updateFilter, markedFilter, filterValue, switchTheme, themeValue, swipe, windowWidth }) => {
+const NoteNav = ({
+  data,
+  onNoteClick,
+  onDeleteClick,
+  reset,
+  creationFilter,
+  updateFilter,
+  markedFilter,
+  filterValue,
+  switchTheme,
+  themeValue,
+  swipe,
+  windowWidth,
+  logOut
+}) => {
+
+  const navigate = useNavigate()
+  const logoutWithRedirect = () => {
+    logOut()
+    navigate('/')
+  }
 
   return (
     <NavContainer slided={swipe} windowWidth={windowWidth}>
@@ -142,9 +164,12 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
             eximo={() => onDeleteClick(items.id)}
           />
         )
-      )}
-    </NoteContainer>
+        )}
+      </NoteContainer>
       <Toolbox>
+        <Button onClick={() => logoutWithRedirect()}>
+          <AiOutlineLogout />
+        </Button>
         <Button onClick={() => switchTheme()}>
           {!!themeValue ? <FiMoon /> : <FiSun />}
         </Button>
@@ -153,7 +178,8 @@ const NoteNav = ({ data, onNoteClick, onDeleteClick, reset, creationFilter, upda
           orderByCreation={creationFilter}
           orderByUpdate={updateFilter}
           orderByMarked={markedFilter}
-          filterValue={filterValue} />
+          filterValue={filterValue}
+        />
       </Toolbox>
     </NavContainer>
   )
