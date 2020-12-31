@@ -1,10 +1,10 @@
-import styled from 'styled-components'
 import { useContext, useState, useEffect } from 'react'
-import { signInWithGoogle } from '../config/firebase'
-import { UserContext } from '../providers/userProvider'
 import { useNavigate } from "@reach/router"
-import nevernoteLogo from '../img/nevernote-64.png'
+import { UserContext } from '../providers/userProvider'
+import { signInWithGoogle } from '../config/firebase'
 import { FcGoogle } from 'react-icons/fc'
+import nevernoteLogo from '../img/nevernote-64.png'
+import styled from 'styled-components'
 
 const LoginPageContainer = styled.div`
   width: 100%;
@@ -83,7 +83,7 @@ export default function Login() {
     <LoginPageContainer>
       <LoginBlock>
         <MessageBlock>
-          <img src={nevernoteLogo} />
+          <img src={nevernoteLogo} alt="nevernote logo"/>
           <div>Sorry, but this is a <b>private</b> app.</div>
           <div>If you have an access to the app, please authenticate with your Google Account</div>
           <LoginButton onClick={signInWithGoogle}>

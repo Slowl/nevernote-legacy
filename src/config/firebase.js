@@ -1,6 +1,6 @@
-import firebase from "firebase/app"
-import "firebase/auth"
-import "firebase/firestore"
+import firebase from 'firebase/app'
+import 'firebase/auth'
+import 'firebase/firestore'
 
 // Your web app's Firebase configuration
   var firebaseConfig = {
@@ -21,17 +21,15 @@ export const firestore = firebase.firestore()
 const googleProvider = new firebase.auth.GoogleAuthProvider()
 
 export const signInWithGoogle = () => {
-  auth.signInWithPopup(googleProvider).then((res) => {
-    console.log(res.user)
-  }).catch((error) => {
+  auth.signInWithPopup(googleProvider)
+  .catch((error) => {
     console.log(error.message)
   })
 }
 
 export const logOut = () => {
-  auth.signOut().then(()=> {
-    console.log('logged out')
-  }).catch((error) => {
+  auth.signOut()
+  .catch((error) => {
     console.log(error.message)
   })
 }

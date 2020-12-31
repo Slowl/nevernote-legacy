@@ -1,10 +1,10 @@
-import React, {useState, useEffect, createContext} from "react";
-import { auth } from "../config/firebase"
+import { useState, useEffect, createContext } from 'react'
+import { auth } from '../config/firebase'
 
-export default ({children}) => {
+// eslint-disable-next-line
+export default ({ children }) => {
 
   const [user, setUser] = useState(null)
-
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       user ? (

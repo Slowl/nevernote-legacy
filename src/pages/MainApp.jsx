@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react'
 import styled, { ThemeProvider } from 'styled-components'
-import { firestore, logOut } from '../config/firebase'
-import { LIGHT, DARK } from '../config/colors.js'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from "@reach/router"
 import localforage from 'localforage'
 import Swipe from 'react-easy-swipe'
+import { UserContext } from "../providers/userProvider"
+import { firestore, logOut } from '../config/firebase'
+import { LIGHT, DARK } from '../config/colors.js'
 import { FiChevronRight } from "react-icons/fi"
 
 import NoteNav from '../components/NoteNav'
 import NoteEditor from '../components/NoteEditor'
-import { UserContext } from "../providers/userProvider"
-import { useNavigate } from "@reach/router"
 
 
 const NotesContainer = styled.div`
@@ -53,8 +53,8 @@ const SwipeIndicator = styled.div`
 const MainApp = () => {
 
   const navigate = useNavigate()
-  const user = useContext(UserContext);
-  const [redirectPath, setRedirectPath] = useState(null);
+  const user = useContext(UserContext)
+  const [ redirectPath, setRedirectPath ] = useState(null)
   const [ title, setTitle ] = useState('')
   const [ note, setNote ] = useState('')
   const [ marked, setMarked ] = useState(false)
