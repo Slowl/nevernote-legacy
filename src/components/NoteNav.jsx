@@ -137,7 +137,7 @@ const NoteNav = ({
   const navigate = useNavigate()
   const logoutWithRedirect = () => {
     logOut()
-    navigate('/')
+    setTimeout(() => navigate('/'), 700)
   }
 
   return (
