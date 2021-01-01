@@ -3,5 +3,6 @@ module.exports = {
   globPatterns: ['\*\*/\*.{html,js}'],
   swDest: './public/sw.js',
   clientsClaim: true,
-  skipWaiting: true
+  skipWaiting: true,
+  maximumFileSizeToCacheInBytes: 80000
 };
