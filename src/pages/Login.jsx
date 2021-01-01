@@ -1,5 +1,4 @@
 import { useContext, useEffect } from 'react'
-import { useNavigate } from "@reach/router"
 import { UserContext } from '../providers/userProvider'
 import { signInWithGoogle } from '../config/firebase'
 import { FcGoogle } from 'react-icons/fc'
@@ -66,13 +65,12 @@ const LoginButton = styled.div`
   }
 `
 
-export default function Login() {
-  const navigate = useNavigate()
+const Login = ({ setIsLogged }) => {
   const user = useContext(UserContext)
 
   useEffect(() => {
-    user && navigate('/')
-  }, [user, navigate])
+    !!user ? setIsLogged(true) : setIsLogged(false)
+  }, [user, setIsLogged])
 
   return (
     <LoginPageContainer>
@@ -89,3 +87,5 @@ export default function Login() {
     </LoginPageContainer>
   )
 }
+
+export default Login

@@ -1,6 +1,5 @@
 import styled, { ThemeProvider } from 'styled-components'
 import { useState, useEffect, useContext, useCallback } from 'react'
-import { useNavigate } from "@reach/router"
 import localforage from 'localforage'
 import Swipe from 'react-easy-swipe'
 import { UserContext } from "../providers/userProvider"
@@ -10,6 +9,7 @@ import { FiChevronRight } from "react-icons/fi"
 
 import NoteNav from '../components/NoteNav'
 import NoteEditor from '../components/NoteEditor'
+import Login from './Login'
 
 
 const NotesContainer = styled.div`
@@ -52,7 +52,6 @@ const SwipeIndicator = styled.div`
 
 const MainApp = () => {
 
-  const navigate = useNavigate()
   const user = useContext(UserContext)
   const [ title, setTitle ] = useState('')
   const [ note, setNote ] = useState('')
@@ -66,6 +65,7 @@ const MainApp = () => {
   const [ isLight, setThemeIsLight ] = useState(false)
   const [ isSwiped, setSwipe ] = useState(true)
   const [ windowWidth, setWindowsWidth ] = useState(0)
+  const [ isLogged, setIsLogged ] = useState(false)
 
   const db = firestore
   const notes = db.collection('notes')
@@ -86,7 +86,7 @@ const MainApp = () => {
   }, [notes])
 
   useEffect(() => {
-    Requestor()
+    isLogged && Requestor()
     setWindowsWidth(window.innerWidth)
     localforage.getItem('localTheme').then(val => {
       val !== null && setTheme(val)
@@ -96,11 +96,11 @@ const MainApp = () => {
         setThemeIsLight(true)
       }
     })
-  }, [Requestor])
+  }, [Requestor, isLogged])
 
   useEffect(() => {
-    !user && navigate("/login")
-  }, [user, navigate])
+    !user && setIsLogged(false)
+  }, [user, setIsLogged])
 
   const themeSwitcher = () => {
     if(JSON.stringify(theme) === JSON.stringify(DARK)){
@@ -209,42 +209,45 @@ const MainApp = () => {
 
   return (
       <ThemeProvider theme={theme}>
-        <Swipe
-          onSwipeLeft={onSwipeLeft}
-          onSwipeRight={onSwipeRight}
-          tolerance={100}
-        >
-          <NotesContainer>
-            <SwipeIndicator open={isSwiped} windowWidth={windowWidth}><FiChevronRight /></SwipeIndicator>
-            <NoteNav
-              data={data}
-              onNoteClick={handleNoteClick}
-              onDeleteClick={handleDeleteNote}
-              reset={() => Resetor()}
-              creationFilter={filterByCreaDate}
-              updateFilter={filterByModifDate}
-              markedFilter={filterByMarked}
-              filterValue={filterIndicator}
-              switchTheme={themeSwitcher}
-              themeValue={isLight}
-              swipe={isSwiped}
-              windowWidth={windowWidth}
-              logOut={logOut}
-            />
-            <NoteEditor
-              onTitleChange={handleTitleChange}
-              onNoteChange={handleNoteChange}
-              onClickMark={handleMark}
-              onClickSend={() => sendOrUpdate()}
-              note={note}
-              title={title}
-              marked={marked}
-              reqState={done}
-              action={action}
-            />
-          </NotesContainer>
-        </Swipe>
-
+        {isLogged ? (
+          <Swipe
+            onSwipeLeft={onSwipeLeft}
+            onSwipeRight={onSwipeRight}
+            tolerance={100}
+          >
+            <NotesContainer>
+              <SwipeIndicator open={isSwiped} windowWidth={windowWidth}><FiChevronRight /></SwipeIndicator>
+              <NoteNav
+                data={data}
+                onNoteClick={handleNoteClick}
+                onDeleteClick={handleDeleteNote}
+                reset={() => Resetor()}
+                creationFilter={filterByCreaDate}
+                updateFilter={filterByModifDate}
+                markedFilter={filterByMarked}
+                filterValue={filterIndicator}
+                switchTheme={themeSwitcher}
+                themeValue={isLight}
+                swipe={isSwiped}
+                windowWidth={windowWidth}
+                logOut={logOut}
+              />
+              <NoteEditor
+                onTitleChange={handleTitleChange}
+                onNoteChange={handleNoteChange}
+                onClickMark={handleMark}
+                onClickSend={() => sendOrUpdate()}
+                note={note}
+                title={title}
+                marked={marked}
+                reqState={done}
+                action={action}
+              />
+            </NotesContainer>
+          </Swipe>
+        ) : (
+          <Login setIsLogged={setIsLogged}/>
+        )}
       </ThemeProvider>
   )
 }
