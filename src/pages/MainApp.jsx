@@ -83,7 +83,7 @@ const MainApp = () => {
         return b.modifiedAt - a.modifiedAt
       }))
     })
-  }, [notes])
+  }, [])
 
   useEffect(() => {
     isLogged && Requestor()
