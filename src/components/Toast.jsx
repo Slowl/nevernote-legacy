@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { FiCheckCircle } from "react-icons/fi"
+import { RiLoader5Line } from "react-icons/ri"
 
 const ToastContainer =styled.div`
   position: relative;
@@ -21,6 +21,10 @@ const ToastContainer =styled.div`
   transition: .3s;
   svg {
     font-size: 1.2em;
+    animation: ${props => props.isDone ? 'rotate .7s ease infinite' : ''};
+    @keyframes rotate {
+      100% { transform: rotate(360deg) }
+    }
   }
 
   @media screen and (max-width: 45em) {
@@ -37,7 +41,7 @@ const ToastContainer =styled.div`
 const Toast = ({ done, text }) => {
   return (
     <ToastContainer isDone={done}>
-      {text} <FiCheckCircle />
+      {text} <RiLoader5Line />
     </ToastContainer>
   )
 }
