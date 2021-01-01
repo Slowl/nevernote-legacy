@@ -7,8 +7,8 @@ const App = () => {
   return (
     <UserProvider>
       <Router>
-        <MainApp path="/app" />
-        <Login path="/" />
+        <MainApp path="/" />
+        <Login path="/login" />
       </Router>
     </UserProvider>
   )

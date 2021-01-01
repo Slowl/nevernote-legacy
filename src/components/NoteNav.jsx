@@ -4,7 +4,6 @@ import Note from './Note'
 import PopupBox from './PopupBox'
 import { FiPlus, FiSun, FiMoon } from "react-icons/fi"
 import { AiOutlineLogout } from "react-icons/ai"
-import { useNavigate } from "@reach/router"
 
 const NavContainer = styled.div`
   max-width: 25vw;
@@ -134,12 +133,6 @@ const NoteNav = ({
   logOut
 }) => {
 
-  const navigate = useNavigate()
-  const logoutWithRedirect = () => {
-    logOut()
-    setTimeout(() => navigate('/'), 700)
-  }
-
   return (
     <NavContainer slided={swipe} windowWidth={windowWidth}>
       <New onClick={reset}> <FiPlus /> </New>
@@ -167,7 +160,7 @@ const NoteNav = ({
         )}
       </NoteContainer>
       <Toolbox>
-        <Button onClick={() => logoutWithRedirect()}>
+        <Button onClick={() => logOut()}>
           <AiOutlineLogout />
         </Button>
         <Button onClick={() => switchTheme()}>

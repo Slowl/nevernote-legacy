@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useEffect } from 'react'
 import { useNavigate } from "@reach/router"
 import { UserContext } from '../providers/userProvider'
 import { signInWithGoogle } from '../config/firebase'
@@ -69,15 +69,10 @@ const LoginButton = styled.div`
 export default function Login() {
   const navigate = useNavigate()
   const user = useContext(UserContext)
-  const [redirectPath, setRedirectPath] = useState(null)
 
   useEffect(() => {
-    user && setRedirectPath('/app')
-  }, [user])
-
-  if (redirectPath) {
-    navigate(redirectPath)
-  }
+    user && navigate('/')
+  }, [user, navigate])
 
   return (
     <LoginPageContainer>

@@ -1,5 +1,5 @@
 import styled, { ThemeProvider } from 'styled-components'
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect, useContext, useCallback } from 'react'
 import { useNavigate } from "@reach/router"
 import localforage from 'localforage'
 import Swipe from 'react-easy-swipe'
@@ -54,7 +54,6 @@ const MainApp = () => {
 
   const navigate = useNavigate()
   const user = useContext(UserContext)
-  const [ redirectPath, setRedirectPath ] = useState(null)
   const [ title, setTitle ] = useState('')
   const [ note, setNote ] = useState('')
   const [ marked, setMarked ] = useState(false)
@@ -71,7 +70,7 @@ const MainApp = () => {
   const db = firestore
   const notes = db.collection('notes')
 
-  const Requestor = () => {
+  const Requestor = useCallback(() => {
     notes.get()
     .then((querySnapshot) => {
       let allNotes = []
@@ -84,7 +83,7 @@ const MainApp = () => {
         return b.modifiedAt - a.modifiedAt
       }))
     })
-  }
+  }, [notes])
 
   useEffect(() => {
     Requestor()
@@ -97,12 +96,11 @@ const MainApp = () => {
         setThemeIsLight(true)
       }
     })
-    !user && setRedirectPath("/")
-  }, [])
+  }, [Requestor])
 
-  if (redirectPath) {
-    navigate(redirectPath)
-  }
+  useEffect(() => {
+    !user && navigate("/login")
+  }, [user, navigate])
 
   const themeSwitcher = () => {
     if(JSON.stringify(theme) === JSON.stringify(DARK)){
@@ -171,9 +169,9 @@ const MainApp = () => {
       db.collection("notes").doc(id).set({id: id, title: title, note: note, marked: marked, createdAt: Date.now(), modifiedAt: Date.now() })
       Requestor()
       Resetor()
-      handleToast('Added', true)
+      handleToast('Adding the note ... ', true)
     } else if (!!usedId) {
-      handleToast('Updated', false)
+      handleToast('Updating the note ...', false)
       db.collection("notes").doc(usedId).update({
         title: title,
         note: note,
@@ -182,7 +180,7 @@ const MainApp = () => {
       })
       .then(
         Requestor(),
-        handleToast('Updated', true)
+        handleToast('Updating the note ...', true)
       )
     }
   }
@@ -196,9 +194,9 @@ const MainApp = () => {
   }
 
   const handleDeleteNote = async (deleteId) => {
-    await handleToast('Deleted', false)
+    await handleToast('Deleting the note ...', false)
     db.collection("notes").doc(deleteId).delete()
-    .then( () => deleteId === usedId ? (Requestor(), Resetor(), handleToast('Deleted', true)) : Requestor(), handleToast('Deleted', true))
+    .then( () => deleteId === usedId ? (Requestor(), Resetor(), handleToast('Deleting the note ...', true)) : Requestor(), handleToast('Deleting the note ...', true))
   }
 
   const handleToast = (text, reqState) => {
@@ -206,7 +204,7 @@ const MainApp = () => {
     setReqState(reqState)
     setTimeout(() => {
       setReqState(!reqState)
-    }, 1500)
+    }, 1000)
   }
 
   return (
