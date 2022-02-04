@@ -1,1 +1,1 @@
-need to finish the project
+crazy how shit my code was ... damn
